@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>High Fidelity Mobile Racer</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; touch-action: none; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        #ui-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        #top-hud { padding: 20px; text-align: right; }
+        h1 { margin: 0; color: #fff; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
+        #speed-gauge { font-size: 42px; color: #00ffff; font-weight: 900; text-shadow: 0 0 10px #00ffff; }
+        .unit { font-size: 14px; color: #fff; }
+
+        /* CONTROLS */
+        #controls {
+            pointer-events: auto;
+            display: flex; justify-content: space-between; padding: 20px 40px; margin-bottom: 20px;
+        }
+        .touch-btn {
+            width: 90px; height: 90px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 24px; transition: transform 0.1s, background 0.1s;
+        }
+        .touch-btn:active { background: rgba(0, 255, 255, 0.4); transform: scale(0.95); box-shadow: 0 0 15px #00ffff; border: none;}
+        
+        #gas-btn { background: rgba(0,255,100,0.1); border-color: rgba(0,255,100,0.3); }
+        #gas-btn:active { background: rgba(0,255,100,0.5); box-shadow: 0 0 15px #00ff66; }
+        
+        #brake-btn { width: 70px; height: 70px; margin-top: 20px; background: rgba(255,50,50,0.1); border-color: rgba(255,50,50,0.3); font-size: 14px; }
+        #brake-btn:active { background: rgba(255,50,50,0.5); box-shadow: 0 0 15px #ff3333; }
+
+        .control-group { display: flex; gap: 15px; align-items: flex-end; }
+    </style>
+</head>
+<body>
+
+    <div id="ui-layer">
+        <div id="top-hud">
+            <h1>Cyber-Drift Pro</h1>
+            <div id="speed-gauge">0 <span class="unit">KM/H</span></div>
+        </div>
+        <div id="controls">
+            <div class="control-group">
+                <div id="btn-left" class="touch-btn">◀</div>
+                <div id="btn-right" class="touch-btn">▶</div>
+            </div>
+            <div class="control-group">
+                <div id="brake-btn" class="touch-btn">BRK</div>
+                <div id="gas-btn" class="touch-btn">GAS</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // --- GAME CONFIG ---
+        const CONFIG = {
+            acceleration: 0.02,
+            friction: 0.985,
+            turnSpeed: 0.04,
+            maxSpeed: 1.4
+        };
+
+        // --- STATE ---
+        let scene, camera, renderer, composer;
+        let car, wheels = [], particles = [];
+        let speed = 0, heading = 0;
+        const inputs = { w:false, s:false, a:false, d:false };
+        const clock = new THREE.Clock();
+
+        init();
+        animate();
+
+        function init() {
+            // 1. SCENE SETUP
+            scene = new THREE.Scene();
+            // High quality fog to hide the edge of the world
+            scene.fog = new THREE.FogExp2(0x050510, 0.015);
+            scene.background = new THREE.Color(0x050510);
+
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+            // 2. RENDERER (High Quality)
+            renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Retain quality on mobile
+            renderer.toneMapping = THREE.ReinhardToneMapping;
+            document.body.appendChild(renderer.domElement);
+
+            // 3. POST-PROCESSING (The "Realistic" Look)
+            const renderScene = new RenderPass(scene, camera);
+            
+            // Bloom: This makes bright things glow
+            const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+            bloomPass.threshold = 0.2; // How bright something needs to be to glow
+            bloomPass.strength = 1.2;  // Intensity
+            bloomPass.radius = 0.5;    // Spread
+
+            composer = new EffectComposer(renderer);
+            composer.addPass(renderScene);
+            composer.addPass(bloomPass);
+
+            // 4. LIGHTING & ENVIRONMENT
+            // We create a "CubeCamera" effect manually by adding lights that simulate a city
+            const ambient = new THREE.AmbientLight(0x404040, 2.0); // Brighter base
+            scene.add(ambient);
+
+            // The Sun (Sunset angle for long shadows)
+            const dirLight = new THREE.DirectionalLight(0xffaa00, 3);
+            dirLight.position.set(-20, 10, -20);
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 2048; // Sharp shadows
+            dirLight.shadow.mapSize.height = 2048;
+            scene.add(dirLight);
+
+            // 5. ASSETS
+            createWorld();
+            createRealisticCar();
+
+            // 6. INPUTS
+            setupControls();
+            window.addEventListener('resize', onResize);
+        }
+
+        // --- TEXTURE GENERATORS ---
+        function getAsphaltTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512; canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+            
+            // Base asphalt
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(0,0,512,512);
+
+            // Noise (Grain)
+            for(let i=0; i<20000; i++){
+                ctx.fillStyle = Math.random() > 0.5 ? '#2a2a2a' : '#000';
+                ctx.fillRect(Math.random()*512, Math.random()*512, 2, 2);
+            }
+            
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(80, 80);
+            tex.anisotropy = 16; // Makes texture look sharp at oblique angles
+            return tex;
+        }
+
+        function createWorld() {
+            // Ground
+            const geo = new THREE.PlaneGeometry(2000, 2000);
+            const mat = new THREE.MeshStandardMaterial({ 
+                map: getAsphaltTexture(),
+                roughness: 0.8,
+                metalness: 0.1
+            });
+            const ground = new THREE.Mesh(geo, mat);
+            ground.rotation.x = -Math.PI/2;
+            ground.receiveShadow = true;
+            scene.add(ground);
+
+            // Grid of "Buildings" with Neon
+            const boxGeo = new THREE.BoxGeometry(1,1,1);
+            const darkMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.1 });
+            const neonMat = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+            const redNeon = new THREE.MeshBasicMaterial({ color: 0xff0055 });
+
+            for(let i=0; i<150; i++) {
+                let x = (Math.random()-0.5) * 600;
+                let z = (Math.random()-0.5) * 600;
+                if(Math.abs(x) < 30 && Math.abs(z) < 30) continue; // Clear spawn
+
+                const h = Math.random() * 40 + 10;
+                const w = Math.random() * 10 + 5;
+                
+                const building = new THREE.Mesh(boxGeo, darkMat);
+                building.position.set(x, h/2, z);
+                building.scale.set(w, h, w);
+                building.castShadow = true;
+                building.receiveShadow = true;
+                scene.add(building);
+
+                // Add glowing strip
+                if(Math.random() > 0.5) {
+                    const strip = new THREE.Mesh(boxGeo, Math.random() > 0.5 ? neonMat : redNeon);
+                    strip.position.copy(building.position);
+                    strip.position.y = Math.random() * h;
+                    // Make strip slightly larger than building
+                    strip.scale.set(w + 0.1, 0.5, w + 0.1);
+                    scene.add(strip);
+                }
+            }
+        }
+
+        function createRealisticCar() {
+            car = new THREE.Group();
+
+            // PBR PAINT MATERIAL
+            // This is key for realism: Clearcoat mimics the glossy layer on cars
+            const paintMat = new THREE.MeshPhysicalMaterial({
+                color: 0x222222,       // Dark grey base
+                metalness: 0.7,
+                roughness: 0.2,
+                clearcoat: 1.0,        // High gloss
+                clearcoatRoughness: 0.05,
+                emissive: 0x000000
+            });
+
+            // Main Body (Composite shape)
+            const mainGeo = new THREE.BoxGeometry(1.8, 0.6, 3.5);
+            const main = new THREE.Mesh(mainGeo, paintMat);
+            main.position.y = 0.6;
+            main.castShadow = true;
+            car.add(main);
+
+            // Roof/Cabin (Sloped)
+            const roofGeo = new THREE.CylinderGeometry(0.8, 1.0, 1.5, 4);
+            const roof = new THREE.Mesh(roofGeo, paintMat);
+            roof.rotation.y = Math.PI / 4; // Rotate to make it square-ish
+            roof.scale.set(1.4, 0.6, 1);
+            roof.position.set(0, 1.1, -0.3);
+            roof.castShadow = true;
+            car.add(roof);
+
+            // Glowing Tail Lights (Bloom will catch this)
+            const tailGeo = new THREE.BoxGeometry(1.6, 0.15, 0.1);
+            const tailMat = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Pure red for glow
+            const tailLight = new THREE.Mesh(tailGeo, tailMat);
+            tailLight.position.set(0, 0.7, 1.76);
+            car.add(tailLight);
+
+            // Headlights
+            const headGeo = new THREE.BoxGeometry(0.4, 0.1, 0.1);
+            const headMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const headL = new THREE.Mesh(headGeo, headMat);
+            headL.position.set(-0.6, 0.6, -1.76);
+            car.add(headL);
+            const headR = headL.clone();
+            headR.position.set(0.6, 0.6, -1.76);
+            car.add(headR);
+
+            // Real Spotlights (to light up the road)
+            const spotL = new THREE.SpotLight(0xffffff, 100);
+            spotL.angle = 0.6;
+            spotL.penumbra = 0.5;
+            spotL.position.set(0, 1, -1);
+            spotL.target.position.set(0, 0, -20);
+            spotL.castShadow = true;
+            car.add(spotL);
+            car.add(spotL.target);
+
+            // Wheels (Simple cylinders but dark)
+            const wheelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.35, 32);
+            const wheelMat = new THREE.MeshStandardMaterial({ color: 0x050505, roughness: 0.5 });
+            
+            const positions = [
+                [-0.9, 0.35, 1.1], [0.9, 0.35, 1.1],
+                [-0.9, 0.35, -1.1], [0.9, 0.35, -1.1]
+            ];
+
+            positions.forEach(p => {
+                const w = new THREE.Mesh(wheelGeo, wheelMat);
+                w.rotation.z = Math.PI/2;
+                w.position.set(...p);
+                w.castShadow = true;
+                car.add(w);
+                wheels.push(w);
+            });
+
+            // Underglow (Neon underneath)
+            const underGeo = new THREE.PlaneGeometry(1.5, 3.5);
+            const underMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide });
+            const under = new THREE.Mesh(underGeo, underMat);
+            under.rotation.x = -Math.PI/2;
+            under.position.y = 0.05; // Just off the ground
+            car.add(under);
+            // Point light for underglow reflection on ground
+            const underLight = new THREE.PointLight(0x00ffff, 2, 5);
+            underLight.position.set(0, 0.2, 0);
+            car.add(underLight);
+
+            scene.add(car);
+        }
+
+        function createParticles() {
+            // Simple dust trail
+            if(Math.abs(speed) > 0.2) {
+                const pGeo = new THREE.PlaneGeometry(0.5, 0.5);
+                const pMat = new THREE.MeshBasicMaterial({ 
+                    color: 0x555555, transparent: true, opacity: 0.4, side: THREE.DoubleSide 
+                });
+                const p = new THREE.Mesh(pGeo, pMat);
+                
+                // Spawn at rear wheels
+                const xOff = Math.random() > 0.5 ? 0.8 : -0.8;
+                const pos = new THREE.Vector3(xOff, 0.1, 1.5).applyMatrix4(car.matrixWorld);
+                p.position.copy(pos);
+                p.rotation.copy(car.rotation);
+                
+                scene.add(p);
+                particles.push({ mesh: p, life: 1.0 });
+            }
+        }
+
+        // --- GAME LOGIC ---
+        function updatePhysics() {
+            if(!car) return;
+
+            // Engine
+            if(inputs.w) speed += CONFIG.acceleration;
+            if(inputs.s) speed -= CONFIG.acceleration;
+            speed *= CONFIG.friction;
+
+            // Steering (only when moving)
+            if(Math.abs(speed) > 0.05) {
+                const dir = speed > 0 ? 1 : -1;
+                if(inputs.a) heading += CONFIG.turnSpeed * dir;
+                if(inputs.d) heading -= CONFIG.turnSpeed * dir;
+            }
+
+            // Apply
+            car.rotation.y = heading;
+            car.position.x += Math.sin(heading) * speed;
+            car.position.z += Math.cos(heading) * speed;
+
+            // Wheel Animation
+            wheels.forEach(w => w.rotation.x += speed);
+            const steer = (inputs.a ? 1 : 0) + (inputs.d ? -1 : 0);
+            wheels[2].rotation.y = steer * 0.4;
+            wheels[3].rotation.y = steer * 0.4;
+
+            // Particles
+            createParticles();
+            particles.forEach((p, index) => {
+                p.life -= 0.02;
+                p.mesh.position.y += 0.02; // Float up
+                p.mesh.scale.multiplyScalar(0.95); // Shrink
+                p.mesh.material.opacity = p.life * 0.4;
+                if(p.life <= 0) {
+                    scene.remove(p.mesh);
+                    particles.splice(index, 1);
+                }
+            });
+
+            // UI
+            const kph = Math.floor(Math.abs(speed) * 200);
+            document.getElementById('speed-gauge').innerHTML = kph + '<span class="unit">KM/H</span>';
+            
+            // Camera Shake (Speed effect)
+            const shake = Math.random() * speed * 0.05;
+            
+            // Smooth Follow Camera
+            const relativeOffset = new THREE.Vector3(0, 5, 8 + (speed*2)); // Zoom out as you go fast
+            const camPos = relativeOffset.applyMatrix4(car.matrixWorld);
+            camera.position.lerp(camPos, 0.1);
+            camera.position.x += shake; // Apply shake
+            camera.lookAt(car.position.x, car.position.y + 1, car.position.z);
+        }
+
+        function setupControls() {
+            const onTouch = (id, key, val) => {
+                const el = document.getElementById(id);
+                el.addEventListener('touchstart', (e) => { e.preventDefault(); inputs[key] = true; }, {passive:false});
+                el.addEventListener('touchend', (e) => { e.preventDefault(); inputs[key] = false; }, {passive:false});
+                // Mouse fallback
+                el.addEventListener('mousedown', () => inputs[key] = true);
+                el.addEventListener('mouseup', () => inputs[key] = false);
+            };
+            onTouch('btn-left', 'a');
+            onTouch('btn-right', 'd');
+            onTouch('gas-btn', 'w');
+            onTouch('brake-btn', 's');
+            
+            // Keyboard fallback
+            window.addEventListener('keydown', e => {
+                if(e.key === 'w') inputs.w = true;
+                if(e.key === 's') inputs.s = true;
+                if(e.key === 'a') inputs.a = true;
+                if(e.key === 'd') inputs.d = true;
+            });
+            window.addEventListener('keyup', e => {
+                if(e.key === 'w') inputs.w = false;
+                if(e.key === 's') inputs.s = false;
+                if(e.key === 'a') inputs.a = false;
+                if(e.key === 'd') inputs.d = false;
+            });
+        }
+
+        function onResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            updatePhysics();
+            composer.render(); // Use composer instead of renderer
+        }
+    </script>
+</body>
+</html>

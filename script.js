@@ -35,6 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
         disableOnInteraction: true,
       },
     });
+
+    // Initialize Google Reviews Swiper (Continuous Marquee)
+    new Swiper(".google-reviews-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      speed: 8000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 },
+      },
+    });
   }
 
   // Form submission mock

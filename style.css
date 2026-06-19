@@ -595,6 +595,64 @@ a:hover {
   box-shadow: 0 0 0 3px rgba(182, 19, 41, 0.1);
 }
 
+/* Contact Section */
+.contact-section {
+  padding: 6rem 0;
+  background-color: var(--base);
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.contact-list li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--contrast-2);
+}
+
+.corporate-form {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.corporate-form h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.corporate-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.corporate-form input,
+.corporate-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.corporate-form textarea {
+  resize: vertical;
+}
+
 /* Footer */
 .site-footer {
   background-color: var(--contrast);
@@ -606,7 +664,8 @@ a:hover {
 
 /* Responsive */
 @media (max-width: 992px) {
-  .hero-grid {
+  .hero-grid,
+  .contact-inner {
     grid-template-columns: 1fr;
   }
   .cards-grid {
@@ -648,7 +707,8 @@ a:hover {
   /* Grid and Spacing Reductions */
   .hero-grid,
   .corner-grid,
-  .cards-grid {
+  .cards-grid,
+  .contact-inner {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
   }
@@ -657,7 +717,8 @@ a:hover {
   .card,
   .hero-form-card,
   .testimonial-card,
-  .google-review-card {
+  .google-review-card,
+  .corporate-form {
     padding: 1.5rem !important;
   }
 

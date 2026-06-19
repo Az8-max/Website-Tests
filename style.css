@@ -235,21 +235,33 @@ a:hover {
   letter-spacing: 1px;
 }
 
-.logos-grid {
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-  flex-wrap: wrap;
+.trust-swiper {
+  width: 100%;
+  padding: 0 40px; /* Space for arrows */
 }
 
-.logo-box {
-  background-color: var(--base-3);
-  padding: 1.5rem 2rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  font-weight: 700;
+.award-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.award-item p {
+  font-size: 0.875rem;
   color: var(--contrast-2);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+/* Swiper arrow overrides */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--contrast);
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 1.5rem;
 }
 
 /* Expertise Grid */

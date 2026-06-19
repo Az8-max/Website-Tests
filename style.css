@@ -606,31 +606,68 @@ a:hover {
 
 /* Responsive */
 @media (max-width: 992px) {
-  .hero-inner,
-  .proof-inner,
-  .contact-inner {
+  .hero-grid {
     grid-template-columns: 1fr;
   }
-
   .cards-grid {
-    grid-template-columns: md;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
+  /* Drastically reduce vertical height on mobile using !important to override any inline styles */
+  .hero,
+  .trust-bar,
+  .expertise,
+  .in-your-corner,
+  .testimonials-section,
+  .google-reviews-section,
+  .contact-section {
+    padding: 2.5rem 0 !important;
   }
-  .hero {
-    padding: 4rem 0;
+
+  /* Typography Scaling */
+  h1,
+  .hero-title {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
   }
-  .main-nav {
-    display: none;
-  } /* Simplified for mobile */
+
+  h2,
+  .section-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Grid and Spacing Reductions */
+  .hero-grid,
+  .corner-grid,
   .cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
-  .hero-actions {
-    flex-direction: column;
+
+  /* Card Padding Reductions */
+  .card,
+  .hero-form-card,
+  .testimonial-card,
+  .google-review-card {
+    padding: 1.5rem !important;
+  }
+
+  .testimonial-text {
+    margin-bottom: 1rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Hide Desktop Nav Elements */
+  .main-nav {
+    display: none !important;
   }
 }

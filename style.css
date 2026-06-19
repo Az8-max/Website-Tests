@@ -345,66 +345,60 @@ a:hover {
   transform: translateX(5px);
 }
 
-/* Proof Block */
-.proof-block {
-  padding: 6rem 0;
-  background-color: var(--contrast);
-  color: var(--base-3);
+/* Testimonials Slider */
+.testimonials-section {
+  overflow: hidden;
 }
 
-.proof-block h2 {
-  color: var(--base-3);
+.testimonial-card {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
 }
 
-.proof-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.testimonial {
-  margin-top: 3rem;
-  padding-left: 1.5rem;
-  border-left: 4px solid var(--accent);
+.testimonial-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
-.testimonial blockquote {
-  font-size: 1.3rem;
-  font-style: italic;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.testimonial cite {
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.stat-card {
-  background-color: var(--base-3);
-  color: var(--contrast);
-  padding: 4rem 3rem;
-  border-radius: 8px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  text-align: center;
-}
-
-.stat-label {
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
-
-.stat-value {
+.testimonial-text::before {
+  content: "“";
+  font-family: Georgia, serif;
   font-size: 4rem;
-  font-family: "Lora", serif;
-  font-weight: 700;
-  color: var(--contrast);
-  margin-bottom: 1rem;
+  color: rgba(182, 19, 41, 0.1);
+  position: absolute;
+  top: -20px;
+  left: -10px;
   line-height: 1;
+}
+
+.testimonial-author {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+/* Swiper Pagination styling */
+.swiper-pagination-bullet {
+  background: #ccc;
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background: var(--accent);
 }
 
 .stat-desc {

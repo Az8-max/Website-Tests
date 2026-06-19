@@ -16,6 +16,25 @@ document.addEventListener("DOMContentLoaded", () => {
         1024: { slidesPerView: 5 },
       },
     });
+
+    // Initialize Testimonials Swiper
+    new Swiper(".testimonials-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: true,
+      },
+    });
   }
 
   // Form submission mock

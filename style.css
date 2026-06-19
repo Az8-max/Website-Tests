@@ -237,7 +237,21 @@ a:hover {
 
 .trust-swiper {
   width: 100%;
-  padding: 0 40px; /* Space for arrows */
+  padding: 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
 }
 
 .award-item {

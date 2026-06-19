@@ -273,6 +273,21 @@ a:hover {
   transition-timing-function: linear !important;
 }
 
+/* In Your Corner Section */
+.corner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .corner-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 /* Expertise Grid */
 .expertise {
   padding: 6rem 0;

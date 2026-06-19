@@ -259,30 +259,6 @@ a:hover {
   transition-timing-function: linear !important;
 }
 
-/* Swiper arrow overrides */
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  content: "" !important;
-}
-
-.swiper-button-prev {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: center;
-  width: 24px;
-  height: 24px;
-}
-
-.swiper-button-next {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: center;
-  width: 24px;
-  height: 24px;
-}
-
 /* Expertise Grid */
 .expertise {
   padding: 6rem 0;

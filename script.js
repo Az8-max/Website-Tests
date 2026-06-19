@@ -10,10 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         delay: 0,
         disableOnInteraction: false,
       },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
       breakpoints: {
         640: { slidesPerView: 3 },
         768: { slidesPerView: 4 },

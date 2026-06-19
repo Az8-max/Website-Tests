@@ -178,13 +178,21 @@ a:hover {
 .hero {
   padding: 6rem 0;
   background-color: var(--base-3);
+  overflow: hidden;
 }
 
-.hero-inner {
+.hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+}
+
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
 }
 
 .hero-content .highlight {

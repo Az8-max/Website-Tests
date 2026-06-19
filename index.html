@@ -44,38 +44,29 @@
     </header>
 
     <!-- Hero Section -->
-    <section
-      class="hero"
-      style="text-align: center; background-color: #fff; padding: 4rem 0 2rem"
-    >
-      <div class="container">
-        <h1
-          class="hero-title"
-          style="font-size: 3.5rem; margin-bottom: 2rem; color: #333"
-        >
-          Your fight.<br /><span style="color: #b61329"
-            >Becomes our fight.</span
+    <!-- Hero Section -->
+    <section class="hero" style="background-color: #fff; padding: 4rem 0">
+      <div class="container hero-grid">
+        <div class="hero-content" style="text-align: left">
+          <h1
+            class="hero-title"
+            style="
+              font-size: 4rem;
+              margin-bottom: 1.5rem;
+              color: #333;
+              line-height: 1.1;
+            "
           >
-        </h1>
-
-        <img
-          src="https://silvesterlegal.com/wp-content/uploads/2026/04/silvesterlegal-main-banner-image.png"
-          alt="Silvester Legal Team"
-          style="
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto 3rem;
-          "
-        />
-
-        <div style="max-width: 800px; margin: 0 auto">
+            Your fight.<br /><span style="color: #b61329"
+              >Becomes our fight.</span
+            >
+          </h1>
           <p
             class="hero-subtitle"
             style="
-              font-size: 1.25rem;
+              font-size: 1.2rem;
               color: #555;
-              margin-bottom: 2.5rem;
+              margin-bottom: 2rem;
               line-height: 1.6;
             "
           >
@@ -85,16 +76,115 @@
             consequences. Nobody should bet against us here. Our record speaks
             for itself.
           </p>
+          <img
+            src="https://silvesterlegal.com/wp-content/uploads/2026/04/silvesterlegal-main-banner-image.png"
+            alt="Silvester Legal Team"
+            style="
+              max-width: 100%;
+              height: auto;
+              display: block;
+              border-radius: 8px;
+            "
+          />
+        </div>
+
+        <div
+          class="hero-form-wrapper"
+          style="display: flex; align-items: center"
+        >
           <div
-            class="hero-actions"
-            style="display: flex; gap: 1rem; justify-content: center"
+            class="hero-form-card"
+            style="
+              background: white;
+              padding: 2.5rem;
+              border-radius: 12px;
+              box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+              border: 1px solid var(--border-color);
+              width: 100%;
+            "
           >
-            <button class="btn btn-primary btn-large">
+            <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: #333">
               Get a Case Evaluation
-            </button>
-            <button class="btn btn-outline btn-large">
-              Shareholder & Minority Rights Disputes
-            </button>
+            </h3>
+            <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem">
+              Speak to our litigation specialists. We will review your matter
+              and respond within 24 hours.
+            </p>
+            <form
+              id="heroContactForm"
+              class="contact-form"
+              style="display: flex; flex-direction: column; gap: 1rem"
+            >
+              <div class="form-group">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  required
+                  style="
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  required
+                  style="
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  required
+                  style="
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                  "
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  placeholder="Briefly describe your dispute..."
+                  rows="4"
+                  required
+                  style="
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                    resize: vertical;
+                  "
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="
+                  width: 100%;
+                  padding: 1rem;
+                  font-size: 1.1rem;
+                  border-radius: 6px;
+                "
+              >
+                Submit Request
+              </button>
+            </form>
           </div>
         </div>
       </div>

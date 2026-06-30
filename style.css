@@ -1,8 +1,8 @@
 :root {
   /* Colors */
-  --color-primary-navy: #0B192C;
-  --color-accent-blue: #2563EB;
-  --color-accent-blue-hover: #1D4ED8;
+  --color-primary-navy: #FFFFFF; /* Original site uses white backgrounds */
+  --color-accent-blue: #b61329; /* Silvester Maroon */
+  --color-accent-blue-hover: #8f0f20;
   --color-light-bg: #F8FAFC;
   --color-light-card: #FFFFFF;
   --color-text-dark: #0F172A;
@@ -106,9 +106,9 @@ a:hover {
   gap: 8px;
   padding: 6px 16px;
   border-radius: var(--radius-pill);
-  background-color: #EFF6FF;
+  background-color: #FEF2F2;
   color: var(--color-accent-blue);
-  border: 1px solid #BFDBFE;
+  border: 1px solid #FECACA;
   font-weight: 600;
   font-size: 0.85rem;
 }
@@ -117,7 +117,7 @@ a:hover {
 .hero {
   background-color: var(--color-primary-navy);
   padding: 100px 0;
-  color: var(--color-text-light);
+  color: var(--color-text-dark);
 }
 .hero-grid {
   display: grid;
@@ -126,7 +126,7 @@ a:hover {
   align-items: center;
 }
 .hero-title {
-  color: white;
+  color: var(--color-text-dark);
   font-size: 3.5rem;
   line-height: 1.1;
   margin-bottom: 24px;
@@ -135,7 +135,7 @@ a:hover {
   color: var(--color-accent-blue);
 }
 .hero-subtitle {
-  color: #94A3B8;
+  color: var(--color-text-muted);
   font-size: 1.15rem;
   margin-bottom: 32px;
   max-width: 90%;
@@ -262,7 +262,7 @@ a:hover {
 .feature-icon {
   width: 48px;
   height: 48px;
-  background: #EFF6FF;
+  background: #FEF2F2;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -315,8 +315,8 @@ a:hover {
   border-color: #FECACA;
 }
 .compare-card.good {
-  background-color: #EFF6FF;
-  border-color: #BFDBFE;
+  background-color: #F8FAFC;
+  border-color: #E2E8F0;
 }
 .compare-card h3 {
   font-size: 1.75rem;
@@ -326,7 +326,7 @@ a:hover {
   color: #991B1B;
 }
 .compare-card.good h3 {
-  color: #1E40AF;
+  color: var(--color-accent-blue);
 }
 .compare-list {
   list-style: none;
@@ -342,11 +342,11 @@ a:hover {
   font-size: 1.2rem;
 }
 .compare-card.bad .compare-list li span { color: #DC2626; }
-.compare-card.good .compare-list li span { color: #2563EB; }
+.compare-card.good .compare-list li span { color: var(--color-accent-blue); }
 
 /* CTA Banner */
 .cta-banner {
-  background-color: var(--color-primary-navy);
+  background-color: var(--color-accent-blue);
   padding: 80px 0;
   color: white;
   text-align: center;
@@ -357,9 +357,72 @@ a:hover {
   margin-bottom: 16px;
 }
 .cta-banner p {
-  color: #94A3B8;
+  color: rgba(255,255,255,0.9);
   font-size: 1.1rem;
   margin-bottom: 32px;
+}
+
+/* Google Reviews */
+.google-reviews {
+  padding: 80px 0;
+  background-color: var(--color-light-bg);
+}
+.google-review-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.google-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.google-icon img {
+  width: 24px;
+}
+.reviewer-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+.review-time {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+.review-stars {
+  color: #fbbc05;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+.verified-tick {
+  color: #bbb;
+  font-size: 0.9rem;
+  margin-left: 5px;
+}
+.review-text {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  flex-grow: 1;
 }
 
 /* Footer */

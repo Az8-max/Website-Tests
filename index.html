@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -132,6 +133,66 @@
       </div>
     </section>
 
+    <!-- Google Reviews Section -->
+    <section class="google-reviews">
+      <div class="container">
+        <h2 class="section-title">What our <span class="underline">clients</span> say</h2>
+        <p class="section-subtitle">Real experiences from business owners and directors we've fought for.</p>
+        
+        <div class="swiper google-reviews-swiper" style="padding: 20px 0; overflow: hidden;">
+          <div class="swiper-wrapper">
+            <!-- Review 1 -->
+            <div class="swiper-slide">
+              <div class="google-review-card">
+                <div class="google-review-header">
+                  <div class="avatar" style="background-color: #8c6a5e">F</div>
+                  <div class="google-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" />
+                  </div>
+                </div>
+                <h4 class="reviewer-name">Foundation Football Club Admin</h4>
+                <p class="review-time">3 months ago</p>
+                <div class="review-stars">⭐⭐⭐⭐⭐ <span class="verified-tick">✔</span></div>
+                <p class="review-text">Akesh Abhilash is an outstanding legal professional who consistently delivers work of the highest standard. He has supported us...</p>
+              </div>
+            </div>
+            
+            <!-- Review 2 -->
+            <div class="swiper-slide">
+              <div class="google-review-card">
+                <div class="google-review-header">
+                  <div class="avatar" style="background-color: #124d38">J</div>
+                  <div class="google-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" />
+                  </div>
+                </div>
+                <h4 class="reviewer-name">John Proctor</h4>
+                <p class="review-time">3 months ago</p>
+                <div class="review-stars">⭐⭐⭐⭐⭐ <span class="verified-tick">✔</span></div>
+                <p class="review-text">I highly recommend Akesh Abhilash for any litigation matters. He is exceptionally knowledgeable, highly responsive, and truly brilliant...</p>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="swiper-slide">
+              <div class="google-review-card">
+                <div class="google-review-header">
+                  <div class="avatar" style="background-color: #f75d8c">A</div>
+                  <div class="google-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" />
+                  </div>
+                </div>
+                <h4 class="reviewer-name">Arulchelvam Jeya</h4>
+                <p class="review-time">3 months ago</p>
+                <div class="review-stars">⭐⭐⭐⭐⭐ <span class="verified-tick">✔</span></div>
+                <p class="review-text">Professional....empathetic.......top tier, professional legal service with a HEART.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Trust Logos -->
     <section class="trust-bar">
       <div class="container">
@@ -150,7 +211,7 @@
       <div class="container">
         <h2>Don't risk a shaky legal setup.</h2>
         <p>Your business deserves top-tier protection. Talk to our litigation specialists today.</p>
-        <a href="#heroContactForm" class="btn btn-primary btn-large" style="background-color: white; color: var(--color-primary-navy) !important;">Contact Our Team &rarr;</a>
+        <a href="#heroContactForm" class="btn btn-primary btn-large" style="background-color: white; color: var(--color-accent-blue) !important;">Contact Our Team &rarr;</a>
       </div>
     </section>
 
@@ -191,5 +252,7 @@
         </div>
       </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

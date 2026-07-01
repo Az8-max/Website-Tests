@@ -118,12 +118,31 @@ a:hover {
   background-color: var(--color-primary-navy);
   padding: 100px 0;
   color: var(--color-text-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background-image: url('https://silvesterlegal.com/wp-content/uploads/2026/04/silvesterlegal-main-banner-image.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.15;
+  z-index: 0;
 }
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 .hero-content h1 {
   color: var(--color-text-dark);

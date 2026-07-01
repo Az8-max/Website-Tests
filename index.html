@@ -12,14 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
-    <link rel="stylesheet" href="style.css?v=5" />
+    <link rel="stylesheet" href="style.css?v=6" />
   </head>
   <body>
     <!-- Header -->
     <header class="site-header">
       <div class="container header-inner">
         <a href="https://silvesterlegal.com/" class="logo">
-          <img src="https://silvesterlegal.com/wp-content/uploads/2026/02/silvester-legal-logo.png" alt="Silvester Legal Logo" style="height: 90px !important; width: auto;" />
+          <img src="https://silvesterlegal.com/wp-content/uploads/2026/02/silvester-legal-logo.png" alt="Silvester Legal Logo" style="height: 90px !important; width: auto; filter: brightness(0) invert(1);" />
         </a>
         <a href="https://silvesterlegal.com/contact-us/" class="btn btn-primary">Contact Us</a>
       </div>
@@ -34,12 +34,9 @@
             <span class="badge">✓ Fixed Pricing Options</span>
             <span class="badge">✓ 5-Star Rated</span>
           </div>
-          <div class="hero-content">
-            <img src="https://silvesterlegal.com/wp-content/uploads/2026/06/shareholder-minority-rights-disputes-banner-image.webp" alt="Shareholder Disputes" style="width: 100%; border-radius: 12px; margin-bottom: 24px; box-shadow: var(--shadow-hero-card);" />
-            <h1>Precision Protection for <span class="highlight">Shareholders</span>.</h1>
+          <h1>Precision Protection for <span>Shareholders</span>.</h1>
           <p id="para1">At Silvester Legal, we protect minority shareholders, directors, and founders in shareholder disputes in Singapore. We advise on governance breakdowns, and represent clients in high-stakes corporate disputes. We investigate director misconduct, challenge abuses of power, and ensure your shareholder rights are upheld.</p>
           <p id="para2">We combine legal expertise with commercial strategy to protect your interests and achieve practical, enforceable outcomes. Boardroom battles demand more than legal knowledge – they need strategic clarity, commercial judgment, and decisive execution.</p>
-        </div>
         </div>
 
         <div class="hero-form-wrapper">
@@ -597,12 +594,45 @@
       });
     </script>
 
-    <!-- CTA Banner -->
-    <section class="cta-banner">
-      <div class="container">
-        <h2>Fight for Your Rights</h2>
-        <p>Facing a dispute or requiring strategic legal advice? We are ready to act. Schedule a confidential consultation with our shareholder lawyers today.</p>
-        <a href="#heroContactForm" class="btn btn-primary btn-large" style="background-color: white; color: var(--color-accent-blue) !important;">Talk to Our Expert Lawyers &rarr;</a>
+    <!-- Bottom CTA & Form -->
+    <section class="bottom-cta-section">
+      <div class="container bottom-cta-grid">
+        <div class="bottom-cta-text">
+          <h2>Fight for Your Rights</h2>
+          <p>Facing a dispute or requiring strategic legal advice? We are ready to act. Schedule a confidential consultation with our shareholder lawyers today.</p>
+          <ul style="list-style: none; margin-bottom: 32px; font-size: 1.1rem; color: rgba(255,255,255,0.9);">
+            <li style="margin-bottom: 12px;"><span style="color: var(--color-accent-gold);">✓</span> Rapid response within 24 hours</li>
+            <li style="margin-bottom: 12px;"><span style="color: var(--color-accent-gold);">✓</span> Independent assessment of your position</li>
+            <li style="margin-bottom: 12px;"><span style="color: var(--color-accent-gold);">✓</span> Strategic guidance on dispute resolution</li>
+          </ul>
+        </div>
+        <div class="bottom-cta-form">
+          <div class="form-card" style="background: white; border: none;">
+            <h3 style="color: var(--color-text-dark);">Get a Case Evaluation</h3>
+            <p style="color: var(--color-text-muted);">Speak to our litigation specialists.</p>
+            <form action="https://silvesterlegal.com/contact-us/" method="POST">
+              <div class="form-group">
+                <input type="text" placeholder="Full Name" required />
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Work Email" required />
+              </div>
+              <div class="form-group">
+                <input type="tel" placeholder="Phone Number" required />
+              </div>
+              <div class="form-group">
+                <select required>
+                  <option value="" disabled selected>Select Area of Dispute</option>
+                  <option value="shareholder">Shareholder Dispute</option>
+                  <option value="commercial">Commercial Litigation</option>
+                  <option value="employment">Employment Dispute</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary form-submit">Talk to Our Lawyers &rarr;</button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -611,7 +641,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <img src="https://silvesterlegal.com/wp-content/uploads/2026/02/silvester-legal-logo.png" alt="Silvester Legal Logo" style="height: 60px; margin-bottom: 24px;" />
+            <img src="https://silvesterlegal.com/wp-content/uploads/2026/02/silvester-legal-logo.png" alt="Silvester Legal Logo" style="height: 60px; margin-bottom: 24px; filter: brightness(0) invert(1);" />
             <p style="color: var(--color-text-muted);">Corporate & Litigation Lawyers Singapore. We work hard to resolve disputes in your favour.</p>
           </div>
           <div class="footer-col">

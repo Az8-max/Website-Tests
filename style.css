@@ -481,6 +481,8 @@ a:hover {
   color: #555;
   line-height: 1.6;
   flex-grow: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Footer */

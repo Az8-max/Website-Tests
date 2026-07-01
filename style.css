@@ -294,11 +294,16 @@ a:hover {
   margin: 0 auto 64px;
 }
 
-/* Cards Grid */
+/* Cards Grid & Case Studies */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
+}
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
 }
 .feature-card {
   background: var(--color-light-card);
@@ -672,24 +677,20 @@ a:hover {
     width: 85vw !important;
   }
 
-  /* Lawyers */
-  .lawyers-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .lawyer-card {
+  /* Team */
+  .team-card {
     padding: 16px;
   }
-  .lawyer-photo {
+  .team-card img {
     width: 90px;
     height: 90px;
   }
-  .lawyer-name {
+  .team-card h4 {
     font-size: 1rem;
   }
 
-  /* Case Studies */
-  .case-studies-grid {
+  /* Cards & Case Studies Grids */
+  .case-studies-grid, .cards-grid {
     grid-template-columns: 1fr !important;
   }
 
@@ -732,11 +733,7 @@ a:hover {
   .hero-content h1 {
     font-size: 1.75rem;
   }
-  .lawyers-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .lawyer-photo {
+  .team-card img {
     width: 75px;
     height: 75px;
   }

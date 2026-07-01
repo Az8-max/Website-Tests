@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize Team Swiper (Continuous Marquee)
     new Swiper(".team-swiper", {
-      slidesPerView: 1,
-      spaceBetween: 20,
+      slidesPerView: 2,
+      spaceBetween: 15,
       loop: true,
       speed: 7000,
       autoplay: {
@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
         disableOnInteraction: false,
       },
       breakpoints: {
-        640: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-        1200: { slidesPerView: 4 },
+        640: { slidesPerView: 3, spaceBetween: 20 },
+        1024: { slidesPerView: 4, spaceBetween: 20 },
+        1200: { slidesPerView: 5, spaceBetween: 20 },
       },
     });
   }

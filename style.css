@@ -305,6 +305,12 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
+.leading-practice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
 .feature-card {
   background: var(--color-light-card);
   border: 1px solid var(--color-border);
@@ -706,8 +712,9 @@ a:hover {
   }
 
   /* Cards & Case Studies Grids */
-  .case-studies-grid, .cards-grid {
+  .case-studies-grid, .cards-grid, .leading-practice-grid {
     grid-template-columns: 1fr !important;
+    gap: 24px;
   }
   .case-study-card {
     height: 250px !important;

@@ -106,11 +106,12 @@ a:hover {
   gap: 8px;
   padding: 6px 16px;
   border-radius: var(--radius-pill);
-  background-color: #FEF2F2;
-  color: var(--color-accent-blue);
-  border: 1px solid #FECACA;
+  background-color: rgba(255,255,255,0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.35);
   font-weight: 600;
   font-size: 0.85rem;
+  backdrop-filter: blur(4px);
 }
 
 /* Hero Section */
@@ -143,7 +144,7 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(15, 30, 60, 0.55);
   z-index: 2;
 }
 .hero-grid {
@@ -155,20 +156,22 @@ a:hover {
   z-index: 3;
 }
 .hero-content h1 {
-  color: var(--color-text-dark);
+  color: #ffffff;
   font-size: 3.5rem;
   line-height: 1.1;
   margin-bottom: 24px;
   font-family: var(--font-serif);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 .hero-content h1 span {
-  color: var(--color-accent-blue);
+  color: #f9c0c7;
 }
 .hero-content p {
-  color: var(--color-text-muted);
-  font-size: 1.15rem;
-  margin-bottom: 24px;
+  color: rgba(255,255,255,0.88);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
   max-width: 95%;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 .hero-badges {

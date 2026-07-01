@@ -209,20 +209,13 @@ a:hover {
 .trust-swiper .swiper-wrapper {
   transition-timing-function: linear !important;
 }
-.trust-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 48px;
-}
-.trust-logos img {
+.trust-bar img {
   height: 60px;
   filter: grayscale(100%);
   opacity: 0.6;
   transition: all 0.3s ease;
 }
-.trust-logos img:hover {
+.trust-bar img:hover {
   filter: grayscale(0%);
   opacity: 1;
 }

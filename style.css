@@ -49,9 +49,9 @@ a:hover {
   color: var(--color-accent-blue-hover);
 }
 .container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 6%;
+  padding: 0 24px;
 }
 
 /* Header */
@@ -166,11 +166,10 @@ a:hover {
   color: #f9c0c7;
 }
 .hero-content p {
-  color: rgba(255,255,255,0.88);
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  max-width: 650px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.15rem;
+  margin-bottom: 32px;
+  max-width: 500px;
 }
 
 .hero-badges {

@@ -52,7 +52,23 @@ document.addEventListener("DOMContentLoaded", () => {
         1200: { slidesPerView: 4 },
       },
     });
-  }
 
+    // Initialize Team Swiper (Continuous Marquee)
+    new Swiper(".team-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      speed: 7000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 },
+      },
+    });
+  }
 
 });

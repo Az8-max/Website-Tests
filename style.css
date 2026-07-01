@@ -148,6 +148,20 @@ a:hover {
   margin-bottom: 32px;
 }
 
+/* Case Study Cards */
+.case-study-card {
+  transition: transform 0.3s ease;
+}
+.case-study-card:hover {
+  transform: translateY(-5px);
+}
+.case-study-card img {
+  transition: transform 0.5s ease;
+}
+.case-study-card:hover img {
+  transform: scale(1.05);
+}
+
 /* Form Card */
 .form-card {
   background: var(--color-light-card);

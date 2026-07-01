@@ -622,11 +622,11 @@ a:hover {
 
   /* Hero */
   .hero {
-    padding: 50px 0 40px;
+    padding: 40px 0 30px;
   }
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
   }
   .hero-content h1 {
     font-size: 2rem;
@@ -650,12 +650,28 @@ a:hover {
     gap: 0;
   }
 
-  /* Section titles */
+  /* Section titles & padding */
   .section-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
+    margin-bottom: 12px;
+  }
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 32px;
   }
   section {
-    padding: 50px 0 !important;
+    padding: 40px 0 !important;
+  }
+  
+  /* Compact Forms */
+  .form-card {
+    padding: 20px 16px;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    padding: 12px 14px;
+  }
+  .form-group textarea {
+    min-height: 60px;
   }
 
   /* Trust Bar */
@@ -693,6 +709,9 @@ a:hover {
   .case-studies-grid, .cards-grid {
     grid-template-columns: 1fr !important;
   }
+  .case-study-card {
+    height: 250px !important;
+  }
 
   /* Comparison */
   .comparison-grid {
@@ -709,7 +728,7 @@ a:hover {
   /* Bottom CTA */
   .bottom-cta-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
   }
   .bottom-cta-text h2 {
     font-size: 2rem;

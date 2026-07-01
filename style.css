@@ -209,13 +209,16 @@ a:hover {
 .trust-swiper .swiper-wrapper {
   transition-timing-function: linear !important;
 }
-.trust-bar img {
-  height: 60px;
+.trust-logo {
+  height: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+  max-width: 100% !important;
   filter: grayscale(100%);
   opacity: 0.6;
   transition: all 0.3s ease;
 }
-.trust-bar img:hover {
+.trust-logo:hover {
   filter: grayscale(0%);
   opacity: 1;
 }

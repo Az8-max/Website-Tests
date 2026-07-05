@@ -718,9 +718,29 @@ a:hover {
   }
 
   /* Cards & Case Studies Grids */
-  .case-studies-grid, .cards-grid, .leading-practice-grid {
+  .case-studies-grid, .leading-practice-grid {
     grid-template-columns: 1fr !important;
     gap: 24px;
+  }
+  
+  /* Services Grid Slider on Mobile */
+  .cards-grid {
+    display: flex !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -20px;
+    padding: 4px 20px 24px 20px; /* shadow clipping prevention */
+    gap: 16px;
+    scrollbar-width: none;
+  }
+  .cards-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .cards-grid .feature-card {
+    scroll-snap-align: center;
+    flex: 0 0 85%;
+    height: auto;
   }
   .case-study-card {
     height: 250px !important;

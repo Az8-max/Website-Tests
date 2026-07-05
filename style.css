@@ -855,6 +855,7 @@ a:hover {
 /* Mobile Hero Background Override */
 @media (max-width: 768px) {
   .hero::before {
-    background-image: url('https://silvesterlegal.com/wp-content/uploads/2026/03/team-discuss-arbitration-and-sicc-dispute.webp');
+    background-image: url('https://silvesterlegal.com/wp-content/uploads/2026/03/team-discuss-arbitration-and-sicc-dispute.webp') !important;
+    filter: none !important;
   }
 }

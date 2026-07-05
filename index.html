@@ -41,7 +41,9 @@
           <div class="form-card">
             <h3>Get a Case Evaluation</h3>
             <p>Speak to our litigation specialists. We respond within 24 hours.</p>
-            <form action="thank-you.html" method="GET">
+            <script>var submitted=false;</script>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location='thank-you.html';}"></iframe>
+            <form action="https://silvesterlegal.com/contact-us/" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
               <div class="form-group">
                 <input type="text" name="name" placeholder="Name" required />
               </div>
@@ -628,7 +630,9 @@
           <div class="form-card" style="background: white; border: none;">
             <h3 style="color: var(--color-text-dark);">Get a Case Evaluation</h3>
             <p style="color: var(--color-text-muted);">Speak to our litigation specialists.</p>
-            <form action="thank-you.html" method="GET">
+            <script>var submitted=false;</script>
+            <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;" onload="if(submitted) {window.location='thank-you.html';}"></iframe>
+            <form action="https://silvesterlegal.com/contact-us/" method="POST" target="hidden_iframe2" onsubmit="submitted=true;">
               <div class="form-group">
                 <input type="text" name="name" placeholder="Name" required />
               </div>

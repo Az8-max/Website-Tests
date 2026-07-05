@@ -629,7 +629,7 @@ a:hover {
     padding: 40px 0 30px;
   }
   .hero::before {
-    background-image: url('hero-bg-people.webp') !important;
+    background-image: url('images/mobile-hero.jpg') !important;
     background-position: 25% center !important;
     filter: none !important;
     top: 0 !important;

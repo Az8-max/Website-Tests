@@ -581,6 +581,8 @@ a:hover {
 }
 .footer-col ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .footer-col ul li {
   margin-bottom: 12px;

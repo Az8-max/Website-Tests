@@ -131,7 +131,7 @@ a:hover {
   bottom: -10px;
   background-image: url('https://silvesterlegal.com/wp-content/uploads/2026/06/shareholder-minority-rights-disputes-banner-image.webp');
   background-size: cover;
-  background-position: center;
+  background-position: center 15%;
   filter: blur(2px);
   z-index: 1;
 }

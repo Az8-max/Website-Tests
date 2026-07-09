@@ -255,7 +255,6 @@ a:hover {
   color: var(--color-text-muted);
   font-family: var(--font-sans);
   font-size: 0.9rem;
-  text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 24px;
 }
@@ -266,8 +265,8 @@ a:hover {
   transition-timing-function: linear !important;
 }
 .trust-logo {
-  height: 60px !important;
-  max-height: 60px !important;
+  height: 100px !important;
+  max-height: 100px !important;
   width: auto !important;
   max-width: 100% !important;
 }
@@ -722,8 +721,8 @@ a:hover {
     justify-content: center;
   }
   .trust-logo {
-    height: 40px !important;
-    max-height: 40px !important;
+    height: 65px !important;
+    max-height: 65px !important;
   }
 
   /* Google Reviews */

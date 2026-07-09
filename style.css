@@ -472,8 +472,9 @@ a:hover {
   border-radius: 0 !important;
   margin: 0 !important;
   object-fit: cover !important;
-  object-position: center top !important;
-  transform: scale(1.4) translateY(6%);
+  object-position: top center !important;
+  transform-origin: top center;
+  transform: scale(1.5) translateY(5%);
 }
 
 .team-card h4 {

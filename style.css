@@ -586,6 +586,7 @@ a:hover {
 }
 .footer-col ul li {
   margin-bottom: 12px;
+  white-space: nowrap;
 }
 .footer-col ul li a {
   color: var(--color-text-muted);

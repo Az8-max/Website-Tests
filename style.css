@@ -167,6 +167,7 @@ a:hover {
 }
 .hero-content h1 span {
   color: var(--color-accent-blue);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
 }
 .hero-content p {
   color: rgba(255, 255, 255, 0.9);

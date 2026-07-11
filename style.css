@@ -693,14 +693,14 @@ a:hover {
   /* Section titles & padding */
   .section-title {
     font-size: 1.85rem;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .section-subtitle {
     font-size: 1rem;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
   section {
-    padding: 40px 0 !important;
+    padding: 24px 0 !important;
   }
   
   /* Compact Forms */
@@ -818,6 +818,10 @@ a:hover {
     font-size: 1.75rem;
   }
   .team-card img {
+    width: 75px;
+    height: 75px;
+  }
+  .walter-img-wrap {
     width: 75px;
     height: 75px;
   }

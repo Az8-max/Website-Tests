@@ -365,6 +365,8 @@ a:hover {
   justify-content: center;
   font-weight: bold;
   font-size: 1.5rem;
+  line-height: 1;
+  padding-left: 3px;
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
   border: 1px solid var(--color-border);
   z-index: 10;
@@ -611,6 +613,9 @@ a:hover {
   .hero-grid, .comparison-grid, .bottom-cta-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .compare-card {
+    padding: 24px;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr;

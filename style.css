@@ -366,7 +366,7 @@ a:hover {
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 1;
-  padding-left: 3px;
+  padding-left: 4px; /* Optical adjustment for v. */
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
   border: 1px solid var(--color-border);
   z-index: 10;
@@ -622,7 +622,20 @@ a:hover {
     gap: 32px;
   }
   .vs-badge {
-    /* Kept visible on mobile as requested */
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    grid-row: 2;
+    margin-top: -52px;
+    margin-bottom: -52px;
+    justify-self: center;
+  }
+  .compare-card.bad {
+    grid-row: 1;
+  }
+  .compare-card.good {
+    grid-row: 3;
   }
   .hero-content h1 {
     font-size: 2.5rem;
@@ -796,7 +809,8 @@ a:hover {
     padding: 24px 20px;
   }
   .vs-badge {
-    /* Kept visible on mobile as requested */
+    margin-top: -42px;
+    margin-bottom: -42px;
   }
 
   /* Bottom CTA */

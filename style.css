@@ -459,6 +459,7 @@ a:hover {
 }
 
 .walter-img {
+  mix-blend-mode: multiply;
   transform: scale(1.15) translateY(2%);
 }
 

@@ -460,7 +460,11 @@ a:hover {
 
 .walter-img {
   mix-blend-mode: multiply;
-  transform: scale(1.15) translateY(2%);
+  transform: scale(1.65) translateY(12%);
+  border-radius: 0 !important;
+  border: none !important;
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 75%);
+  mask-image: radial-gradient(circle at center, black 45%, transparent 75%);
 }
 
 

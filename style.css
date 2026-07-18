@@ -746,6 +746,12 @@ a:hover {
   .section-pad {
     padding: 40px 0;
   }
+  .pb-mobile-optim {
+    padding-bottom: 0 !important;
+  }
+  .pt-mobile-optim {
+    padding-top: 16px !important;
+  }
   
   .google-reviews {
     padding: 40px 0;

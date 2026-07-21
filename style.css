@@ -688,7 +688,7 @@ a:hover {
   }
   .form-row {
     flex-direction: column;
-    gap: 0;
+    gap: 16px;
   }
 
   /* Section titles & padding */

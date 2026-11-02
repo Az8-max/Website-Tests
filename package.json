@@ -1,0 +1,8 @@
+{
+  "name": "silvester-commercial-litigation",
+  "version": "1.0.0",
+  "description": "Commercial Litigation Landing Page for Silvester Legal LLC",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

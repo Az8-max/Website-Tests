@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Test dispute query",
+    "timestamp": "2026-11-01T23:17:39.652Z",
+    "destinations": [
+      "Info@silvesterlegal.com",
+      "Fixen@silvesterlegal.com"
+    ]
+  },
+  {
+    "form": "Hero Dispute Enquiry",
+    "name": "Alex Tan",
+    "company": "Apex Holdings Pte Ltd",
+    "email": "alex.tan@apexholdings.sg",
+    "phone": "+65 9123 4567",
+    "disputeType": "Contract breach",
+    "message": "Breach of distribution contract.",
+    "destinations": [
+      "Info@silvesterlegal.com",
+      "Fixen@silvesterlegal.com"
+    ],
+    "timestamp": "2026-11-02T05:52:45.466Z"
+  },
+  {
+    "form": "Consultation Form",
+    "name": "Serene Lim",
+    "company": "Lim Logistics",
+    "email": "serene@limlogistics.com",
+    "phone": "+65 9876 5432",
+    "type": "Shareholder conflict",
+    "message": "Shareholder deadlock dispute.",
+    "destinations": [
+      "Info@silvesterlegal.com",
+      "Fixen@silvesterlegal.com"
+    ],
+    "timestamp": "2026-11-02T05:59:34.994Z"
+  },
+  {
+    "form": "Hero Dispute Enquiry",
+    "name": "Marcus Lee",
+    "company": "Lee Global Pte Ltd",
+    "email": "marcus@leeglobal.com",
+    "phone": "+65 9234 5678",
+    "disputeType": "Not specified",
+    "message": "Commercial contract dispute.",
+    "destinations": [
+      "Info@silvesterlegal.com",
+      "Fixen@silvesterlegal.com"
+    ],
+    "timestamp": "2026-11-02T06:34:36.466Z"
+  }
+]

@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+.env
+*.zip
+build_*.js
+update_*.js

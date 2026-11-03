@@ -4,5 +4,8 @@
   "description": "Commercial Litigation Landing Page for Silvester Legal LLC",
   "scripts": {
     "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^10.3.1"
   }
 }

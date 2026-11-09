@@ -110,7 +110,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <form id="enquire" action="https://formsubmit.co/Info@silvesterlegal.com" method="POST" style="flex: 1 1 400px; min-width: 0; background: #12151C; color: #FFFFFF; border-top: 5px solid #B61329; border-radius: 16px; box-shadow: 0 24px 60px rgba(18,21,28,0.25); padding: 26px 28px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
 <input type="hidden" name="_cc" value="Fixen@silvesterlegal.com">
 <input type="hidden" name="_subject" value="New Commercial Dispute Enquiry - Silvester Legal">
-<input type="hidden" name="_next" value="thank-you.html">
+<input type="hidden" name="_next" value="https://az8-max.github.io/Website-Tests/thank-you.html">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="form_origin" value="Hero Dispute Enquiry">
 <input type="hidden" name="dispute_type" id="top-dispute-type" value="Not sure yet">
@@ -580,7 +580,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
 <form id="consult-form" action="https://formsubmit.co/Info@silvesterlegal.com" method="POST" style="flex: 1 1 460px; min-width: 0; background: transparent; color: #FFFFFF; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
 <input type="hidden" name="_cc" value="Fixen@silvesterlegal.com">
 <input type="hidden" name="_subject" value="New Consultation Request - Silvester Legal">
-<input type="hidden" name="_next" value="thank-you.html">
+<input type="hidden" name="_next" value="https://az8-max.github.io/Website-Tests/thank-you.html">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="form_origin" value="Consultation Form">
 <h3 class="hd" style="margin: 0; font-size: 26px; font-weight: 800; color: #FFFFFF">Request a consultation</h3>
@@ -638,6 +638,19 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
   var chips=[].slice.call(document.querySelectorAll('.chip')),sel=-1,label=document.getElementById('top-label');
   var OFF='background:transparent;color:#FFFFFF;border:1.5px solid rgba(255,255,255,0.45);',ON='background:#B61329;color:#FFFFFF;border:1.5px solid #B61329;';
   chips.forEach(function(c,i){c.addEventListener('click',function(){sel=(sel===i)?-1:i;chips.forEach(function(d,j){var on=(j===sel);d.setAttribute('aria-pressed',on?'true':'false');if(on){d.classList.add('is-on');}else{d.classList.remove('is-on');}});label.textContent=sel<0?'Request a consultation':'Send enquiry: '+c.textContent.trim();});});
+    var thanksUrl = (function() {
+    try {
+      return new URL('thank-you.html', window.location.href).href;
+    } catch(e) {
+      return 'https://az8-max.github.io/Website-Tests/thank-you.html';
+    }
+  })();
+  try {
+    document.querySelectorAll('input[name="_next"]').forEach(function(inp) {
+      inp.value = thanksUrl;
+    });
+  } catch(e) {}
+
   function sendQuery(data, formEl, btnLabelEl, statusEl, defaultBtnText) {
     btnLabelEl.textContent = 'Submitting enquiry...';
     data.destinations = ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com'];
@@ -658,7 +671,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
         statusEl.style.display = 'block';
         statusEl.innerHTML = '✓ Enquiry received. Redirecting to confirmation page...';
       }
-      setTimeout(function(){ window.location.href = 'thank-you.html'; }, 300);
+      setTimeout(function(){ window.location.href = thanksUrl; }, 300);
     })
     .catch(function(apiErr) {
       console.warn('Backend API unavailable, submitting via FormSubmit relay...', apiErr);
@@ -670,6 +683,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
         _replyto: data.email || undefined,
         _template: 'table',
         _captcha: 'false',
+        _next: thanksUrl,
         'Client Name': data.name || 'Not provided',
         'Company': data.company || 'Not provided',
         'Business Email': data.email || 'Not provided',
@@ -695,14 +709,14 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
           statusEl.style.display = 'block';
           statusEl.innerHTML = '✓ Enquiry received. Redirecting to confirmation page...';
         }
-        setTimeout(function(){ window.location.href = 'thank-you.html'; }, 300);
+        setTimeout(function(){ window.location.href = thanksUrl; }, 300);
       })
       .catch(function(relayErr) {
         console.warn('FormSubmit AJAX failed, submitting form natively:', relayErr);
         if (formEl && typeof formEl.submit === 'function') {
           formEl.submit();
         } else {
-          window.location.href = 'thank-you.html';
+          window.location.href = thanksUrl;
         }
       });
     });

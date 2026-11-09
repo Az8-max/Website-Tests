@@ -139,7 +139,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <textarea placeholder="Briefly describe your dispute" aria-label="Briefly describe your dispute" name="message" rows="2" style="padding: 11px 13px; border: 0; border-radius: 8px; background: #FFFFFF; color: #222222; resize: vertical"></textarea>
 <button type="submit" style="min-height: 52px; background: #B61329; color: #FFFFFF; border: 0; border-radius: 99px; font-size: 16px; font-weight: 800; cursor: pointer"><span id="top-label">Request a consultation</span></button>
-<div id="enquire-status" style="display:none;font-size:13px;line-height:1.5;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.14);color:#FFFFFF;text-align:center;"></div>
+
 </form>
 <ul class="tbadges" data-row="full" aria-label="Ratings and recognition" style="margin: 6px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 620px">
 <li style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #FFFFFF; border: 1px solid #E2E2E5; border-radius: 12px; font-size: 14px; line-height: 1.3; font-weight: 800; color: #171716; min-height: 44px; box-sizing: border-box">
@@ -603,7 +603,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
 </label>
 <label style="display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 700; color: #E4E6EB">What’s happening?<textarea name="message" rows="4" style="padding: 11px 13px; border: 0; border-radius: 8px; background: #FFFFFF; color: #222222; resize: vertical"></textarea></label>
 <button type="submit" style="min-height: 54px; background: #B61329; color: #FFFFFF; border: 0; border-radius: 99px; font-size: 16px; font-weight: 800; cursor: pointer"><span id="bottom-label">Send my enquiry</span></button>
-<div id="consult-status" style="display:none;font-size:13px;line-height:1.5;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.14);color:#FFFFFF;text-align:center;"></div>
+
 </form>
 </div>
 </section>
@@ -651,32 +651,21 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
     });
   } catch(e) {}
 
-  function sendQuery(data, formEl, btnLabelEl, statusEl, defaultBtnText) {
-    btnLabelEl.textContent = 'Submitting enquiry...';
+  function sendQuery(data, formEl) {
     data.destinations = ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com'];
 
-    // 1. Try local/server backend /api/query
-    fetch('/api/query', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(function(res) {
-      if (!res.ok) throw new Error('API server status ' + res.status);
-      return res.json();
-    })
-    .then(function(result) {
-      btnLabelEl.textContent = 'Enquiry Sent ✓';
-      if (statusEl) {
-        statusEl.style.display = 'block';
-        statusEl.innerHTML = '✓ Enquiry received. Redirecting to confirmation page...';
-      }
-      setTimeout(function(){ window.location.href = thanksUrl; }, 300);
-    })
-    .catch(function(apiErr) {
-      console.warn('Backend API unavailable, submitting via FormSubmit relay...', apiErr);
+    // 1. Server API dispatch (background keepalive)
+    try {
+      fetch('/api/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
 
-      // 2. Fallback: FormSubmit AJAX endpoint directly delivering to Info@silvesterlegal.com & Fixen@silvesterlegal.com
+    // 2. FormSubmit AJAX dispatch (background keepalive)
+    try {
       var payload = {
         _cc: 'Fixen@silvesterlegal.com',
         _subject: 'New Commercial Dispute Enquiry - ' + (data.name || 'Website Visitor'),
@@ -700,30 +689,16 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(payload)
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(relayRes) {
-        btnLabelEl.textContent = 'Enquiry Sent ✓';
-        if (statusEl) {
-          statusEl.style.display = 'block';
-          statusEl.innerHTML = '✓ Enquiry received. Redirecting to confirmation page...';
-        }
-        setTimeout(function(){ window.location.href = thanksUrl; }, 300);
-      })
-      .catch(function(relayErr) {
-        console.warn('FormSubmit AJAX failed, submitting form natively:', relayErr);
-        if (formEl && typeof formEl.submit === 'function') {
-          formEl.submit();
-        } else {
-          window.location.href = thanksUrl;
-        }
-      });
-    });
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function() {});
+    } catch(e) {}
+
+    // 3. Immediately and directly go to the thank you page with no submitting state
+    window.location.href = thanksUrl;
   }
 
   var f1 = document.getElementById('enquire');
-  var st1 = document.getElementById('enquire-status');
   if (f1) {
     f1.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -741,13 +716,11 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
         message: f1.elements['message'] ? f1.elements['message'].value : '',
         destinations: ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com']
       };
-      sendQuery(queryData, f1, label, st1, 'Request a consultation');
+      sendQuery(queryData, f1);
     });
   }
 
   var f2 = document.getElementById('consult-form');
-  var label2 = document.getElementById('bottom-label');
-  var st2 = document.getElementById('consult-status');
   if (f2) {
     f2.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -761,7 +734,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
         message: f2.elements['message'] ? f2.elements['message'].value : '',
         destinations: ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com']
       };
-      sendQuery(queryData, f2, label2, st2, 'Send my enquiry');
+      sendQuery(queryData, f2);
     });
   }
 

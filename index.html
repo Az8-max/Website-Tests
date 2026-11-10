@@ -110,11 +110,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <!-- hero form -->
-<form id="enquire" action="https://formsubmit.co/Info@silvesterlegal.com" method="POST" style="flex: 1 1 400px; min-width: 0; background: #12151C; color: #FFFFFF; border-top: 5px solid #B61329; border-radius: 16px; box-shadow: 0 24px 60px rgba(18,21,28,0.25); padding: 26px 28px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
-<input type="hidden" name="_cc" value="Fixen@silvesterlegal.com">
-<input type="hidden" name="_subject" value="New Commercial Dispute Enquiry - Silvester Legal">
-<input type="hidden" name="_next" value="https://az8-max.github.io/Website-Tests/thank-you.html">
-<input type="hidden" name="_captcha" value="false">
+<form id="enquire" action="thank-you.html" method="GET" style="flex: 1 1 400px; min-width: 0; background: #12151C; color: #FFFFFF; border-top: 5px solid #B61329; border-radius: 16px; box-shadow: 0 24px 60px rgba(18,21,28,0.25); padding: 26px 28px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
 <input type="hidden" name="form_origin" value="Hero Dispute Enquiry">
 <input type="hidden" name="dispute_type" id="top-dispute-type" value="Not sure yet">
 <h2 class="hd" style="margin: 0; font-size: 24px; font-weight: 800; color: #FFFFFF">What is your dispute about?</h2>
@@ -580,11 +576,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
 <div style="display: flex; gap: 14px; align-items: center"><span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #B61329; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size: 13px; color: #A0A4AE">Direct Counsel Contact</span><span style="font-size: 15.5px; line-height: 1.5; color: #D6D6DA"><a href="mailto:Info@silvesterlegal.com" style="color: #FFFFFF; text-decoration: underline">Info@silvesterlegal.com</a> &middot; <a href="mailto:Fixen@silvesterlegal.com" style="color: #FFFFFF; text-decoration: underline">Fixen@silvesterlegal.com</a></span></div></div>
 </div>
 </div>
-<form id="consult-form" action="https://formsubmit.co/Info@silvesterlegal.com" method="POST" style="flex: 1 1 460px; min-width: 0; background: transparent; color: #FFFFFF; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
-<input type="hidden" name="_cc" value="Fixen@silvesterlegal.com">
-<input type="hidden" name="_subject" value="New Consultation Request - Silvester Legal">
-<input type="hidden" name="_next" value="https://az8-max.github.io/Website-Tests/thank-you.html">
-<input type="hidden" name="_captcha" value="false">
+<form id="consult-form" action="thank-you.html" method="GET" style="flex: 1 1 460px; min-width: 0; background: transparent; color: #FFFFFF; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
 <input type="hidden" name="form_origin" value="Consultation Form">
 <h3 class="hd" style="margin: 0; font-size: 26px; font-weight: 800; color: #FFFFFF">Request a consultation</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
@@ -648,78 +640,12 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
       return 'https://az8-max.github.io/Website-Tests/thank-you.html';
     }
   })();
-  try {
-    document.querySelectorAll('input[name="_next"]').forEach(function(inp) {
-      inp.value = thanksUrl;
-    });
-  } catch(e) {}
-
-  function sendQuery(data, formEl) {
-    data.destinations = ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com'];
-
-    // 1. Server API dispatch (background keepalive)
-    try {
-      fetch('/api/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        keepalive: true
-      }).catch(function() {});
-    } catch(e) {}
-
-    // 2. FormSubmit AJAX dispatch (background keepalive)
-    try {
-      var payload = {
-        _cc: 'Fixen@silvesterlegal.com',
-        _subject: 'New Commercial Dispute Enquiry - ' + (data.name || 'Website Visitor'),
-        _replyto: data.email || undefined,
-        _template: 'table',
-        _captcha: 'false',
-        _next: thanksUrl,
-        'Client Name': data.name || 'Not provided',
-        'Company': data.company || 'Not provided',
-        'Business Email': data.email || 'Not provided',
-        'Phone Number': data.phone || 'Not provided',
-        'Dispute Type': data.disputeType || data.type || 'Not specified',
-        'Dispute Details': data.message || 'No description provided',
-        'Form Source': data.form || 'Website Enquiry',
-        'Timestamp': new Date().toISOString()
-      };
-
-      fetch('https://formsubmit.co/ajax/Info@silvesterlegal.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(function() {});
-    } catch(e) {}
-
-    // 3. Immediately and directly go to the thank you page with no submitting state
-    window.location.href = thanksUrl;
-  }
 
   var f1 = document.getElementById('enquire');
   if (f1) {
     f1.addEventListener('submit', function(e) {
       e.preventDefault();
-      var selectedChip = sel >= 0 && chips[sel] ? chips[sel].textContent.trim() : 'Not specified';
-      var topDisputeTypeEl = document.getElementById('top-dispute-type');
-      if (topDisputeTypeEl) topDisputeTypeEl.value = selectedChip;
-
-      var queryData = {
-        form: 'Hero Dispute Enquiry',
-        name: f1.elements['name'] ? f1.elements['name'].value : '',
-        company: f1.elements['company'] ? f1.elements['company'].value : '',
-        email: f1.elements['email'] ? f1.elements['email'].value : '',
-        phone: f1.elements['phone'] ? f1.elements['phone'].value : '',
-        disputeType: selectedChip,
-        message: f1.elements['message'] ? f1.elements['message'].value : '',
-        destinations: ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com']
-      };
-      sendQuery(queryData, f1);
+      window.location.href = thanksUrl;
     });
   }
 
@@ -727,17 +653,7 @@ marquee(document.getElementById('aw-row'),22,22,null,null);
   if (f2) {
     f2.addEventListener('submit', function(e) {
       e.preventDefault();
-      var queryData = {
-        form: 'Consultation Form',
-        name: f2.elements['name'] ? f2.elements['name'].value : '',
-        company: f2.elements['company'] ? f2.elements['company'].value : '',
-        email: f2.elements['email'] ? f2.elements['email'].value : '',
-        phone: f2.elements['phone'] ? f2.elements['phone'].value : '',
-        type: f2.elements['type'] ? f2.elements['type'].value : '',
-        message: f2.elements['message'] ? f2.elements['message'].value : '',
-        destinations: ['Info@silvesterlegal.com', 'Fixen@silvesterlegal.com']
-      };
-      sendQuery(queryData, f2);
+      window.location.href = thanksUrl;
     });
   }
 
